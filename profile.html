@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Профиль</title>
-    <script src="https://cdn.tailwindcss.com "></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
 <!-- Шапка -->
 <header class="bg-yellow-500 text-white p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">МаршрутОпе</h1>
-    <a href="index2.html" class="hover:text-yellow-300">На главную</a>
+    <a href="index2.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
+
 </header>
 
 <!-- Контент -->
@@ -33,11 +33,10 @@
         <label class="block mb-4">
             <span class="block mb-2 font-medium">Номер телефона:</span>
             <input
-                    type="text"
+                    type="tel"
                     id="phone"
                     class="border border-gray-300 p-2 w-full rounded-md"
                     placeholder="+7 (___) ___-__-__"
-                    readonly
             />
             <small class="text-gray-500 mt-1 block">После +7 должно быть ровно 10 цифр</small>
         </label>
@@ -56,8 +55,8 @@
         <!-- Кнопка сохранения -->
         <button
                 id="saveBtn"
+                class="mt-4 w-full bg-gray-300 text-white px-4 py-2 rounded-md transition duration-300"
                 disabled
-                class="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-md opacity-50 cursor-not-allowed hover:bg-blue-600 transition duration-300"
         >
             Сохранить изменения
         </button>
@@ -79,6 +78,12 @@
     const emailInput = document.getElementById("email");
     const saveBtn = document.getElementById("saveBtn");
 
+    // Сохраняем исходные значения для сравнения
+    let originalValues = {
+        fullName: "",
+        phone: ""
+    };
+
     // Загружаем данные из localStorage
     const savedData = JSON.parse(localStorage.getItem("userData")) || {};
 
@@ -88,59 +93,65 @@
 
     if (savedData.fullName) {
         fullNameInput.value = savedData.fullName;
+        originalValues.fullName = savedData.fullName;
     }
 
     if (savedData.phone) {
         phoneInput.value = savedData.phone;
+        originalValues.phone = savedData.phone;
     }
 
     function validateInputs() {
         const fullName = fullNameInput.value.trim();
         const phone = phoneInput.value.replace(/\D/g, ""); // Только цифры
 
-        if (fullName && phone.length === 10) {
-            saveBtn.disabled = false;
-            saveBtn.classList.remove("opacity-50", "cursor-not-allowed");
-            saveBtn.classList.add("bg-blue-500", "hover:bg-blue-600", "cursor-pointer");
+        // Проверяем что поля заполнены И значения изменились
+        const hasChanges = fullName !== originalValues.fullName ||
+            phone !== originalValues.phone.replace(/\D/g, "");
+
+        if (fullName && phone.length === 11 && hasChanges) {
+            enableSaveButton();
         } else {
-            saveBtn.disabled = true;
-            saveBtn.classList.add("opacity-50", "cursor-not-allowed");
-            saveBtn.classList.remove("bg-blue-500", "hover:bg-blue-600", "cursor-pointer");
+            disableSaveButton();
         }
     }
 
-    // Обработка ввода телефона
-    phoneInput.addEventListener("input", () => {
-        let value = phoneInput.value;
+    function enableSaveButton() {
+        saveBtn.disabled = false;
+        saveBtn.classList.remove("bg-gray-300");
+        saveBtn.classList.add("bg-blue-500", "hover:bg-blue-600", "cursor-pointer");
+    }
 
-        // Убедимся, что телефон начинается с "+7 "
-        if (!value.startsWith("+7 ")) {
-            value = "+7 ";
-        }
+    function disableSaveButton() {
+        saveBtn.disabled = true;
+        saveBtn.classList.remove("bg-blue-500", "hover:bg-blue-600", "cursor-pointer");
+        saveBtn.classList.add("bg-gray-300");
+    }
 
-        // Оставляем только цифры после "+7"
-        let digits = value.replace(/\D/g, "").substring(0, 10);
+    // Маска для телефона
+    phoneInput.addEventListener("input", function(e) {
+        let x = this.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
 
-        // Форматируем номер
-        let formatted = "+7 ";
-        if (digits.length > 0) formatted += "(" + digits.substring(0, 3);
-        if (digits.length >= 3) formatted += ") " + digits.substring(3, 6);
-        if (digits.length >= 6) formatted += "-" + digits.substring(6, 8);
-        if (digits.length >= 8) formatted += "-" + digits.substring(8, 10);
+        if (!x[1] && x[2] === "") return;
 
-        phoneInput.value = formatted;
+        this.value = !x[1] ? '' : '+7 ' + (x[2] ? '(' + x[2] : '') +
+            (x[3] ? ') ' + x[3] : '') +
+            (x[4] ? '-' + x[4] : '') +
+            (x[5] ? '-' + x[5] : '');
+
         validateInputs();
     });
 
-    // Валидация ФИО
-    fullNameInput.addEventListener("input", () => {
-        validateInputs();
-    });
+    // Валидация при изменении полей
+    fullNameInput.addEventListener("input", validateInputs);
+    phoneInput.addEventListener("input", validateInputs);
 
     // Сохранение данных
-    saveBtn.addEventListener("click", () => {
+    saveBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+
         const fullName = fullNameInput.value.trim();
-        const phone = phoneInput.value.replace(/\D/g, "");
+        const phone = phoneInput.value;
         const email = emailInput.value;
 
         if (!fullName) {
@@ -148,20 +159,29 @@
             return;
         }
 
-        if (phone.length !== 10) {
+        if (phone.replace(/\D/g, "").length !== 11) {
             alert("Телефон должен содержать 10 цифр после +7");
             return;
         }
 
-        // Сохраняем данные
-        localStorage.setItem("userData", JSON.stringify({ fullName, phone: phoneInput.value, email }));
+        // Обновляем оригинальные значения
+        originalValues = {
+            fullName: fullName,
+            phone: phone
+        };
+
+        localStorage.setItem("userData", JSON.stringify({
+            fullName,
+            phone,
+            email
+        }));
+
         alert("Данные успешно сохранены!");
+        disableSaveButton(); // Делаем кнопку неактивной после сохранения
     });
 
-    // Проверка при загрузке страницы
-    window.addEventListener("load", () => {
-        validateInputs();
-    });
+    // Проверка при загрузке
+    validateInputs();
 </script>
 
 </body>

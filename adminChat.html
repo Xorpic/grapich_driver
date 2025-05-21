@@ -3,35 +3,52 @@
 <head>
     <meta charset="UTF-8" />
     <title>Связь с администратором</title>
-    <script src="https://cdn.tailwindcss.com "></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
 <header class="bg-yellow-500 text-white p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">МаршрутОпе</h1>
+    <a href="index2.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
 </header>
 
-<main class="container mx-auto p-8">
-    <h2 class="text-2xl font-bold mb-4">Связь с администратором</h2>
-    <form>
-        <label class="block mb-2">
-            Ваше имя:
-            <input type="text" placeholder="Введите имя" class="border border-gray-300 p-2 w-full rounded-md" />
-        </label>
-        <label class="block mb-2">
-            Email:
-            <input type="email" placeholder="Введите email" class="border border-gray-300 p-2 w-full rounded-md" />
-        </label>
-        <label class="block mb-4">
-            Сообщение:
-            <textarea placeholder="Введите сообщение" class="border border-gray-300 p-2 w-full rounded-md"></textarea>
-        </label>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
-            Отправить
-        </button>
-    </form>
+<main class="flex-grow flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Связь с администратором</h2>
+        <form class="space-y-4">
+            <label class="block">
+                Ваше имя:
+                <input
+                        type="text"
+                        placeholder="Введите имя"
+                        class="mt-1 border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </label>
+            <label class="block">
+                Email:
+                <input
+                        type="email"
+                        placeholder="Введите email"
+                        class="mt-1 border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </label>
+            <label class="block">
+                Сообщение:
+                <textarea
+                        placeholder="Введите сообщение"
+                        class="mt-1 border border-gray-300 p-2 w-full rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                ></textarea>
+            </label>
+            <button
+                    type="submit"
+                    class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+                Отправить
+            </button>
+        </form>
+    </div>
 </main>
 
-<footer class="bg-gray-800 text-white text-center py-2 mt-10">
+<footer class="bg-gray-800 text-white text-center py-4">
     <p>
         <a href="privacy.html" class="hover:text-gray-400">Политика конфиденциальности</a>
         |

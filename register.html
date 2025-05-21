@@ -3,28 +3,126 @@
 <head>
     <meta charset="UTF-8" />
     <title>Регистрация</title>
-    <script src="https://cdn.tailwindcss.com "></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
 <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold mb-4">Регистрация</h2>
-    <form>
-        <label class="block mb-2">
+    <h2 class="text-2xl font-bold mb-4 text-center">Регистрация</h2>
+
+    <!-- Форма -->
+    <form id="registerForm" class="space-y-4">
+        <label class="block">
             Имя:
-            <input type="text" placeholder="Введите имя" class="border border-gray-300 p-2 w-full rounded-md" />
+            <input
+                    type="text"
+                    id="name"
+                    placeholder="Введите имя"
+                    class="border border-gray-300 p-2 w-full rounded-md"
+            />
         </label>
-        <label class="block mb-2">
+        <label class="block">
             Email:
-            <input type="email" placeholder="Введите email" class="border border-gray-300 p-2 w-full rounded-md" />
+            <input
+                    type="email"
+                    id="email"
+                    placeholder="Введите email"
+                    class="border border-gray-300 p-2 w-full rounded-md"
+            />
         </label>
-        <label class="block mb-4">
+        <label class="block">
             Пароль:
-            <input type="password" placeholder="Введите пароль" class="border border-gray-300 p-2 w-full rounded-md" />
+            <input
+                    type="password"
+                    id="password"
+                    placeholder="Введите пароль"
+                    class="border border-gray-300 p-2 w-full rounded-md"
+            />
         </label>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 w-full">
+
+        <!-- Кнопка по умолчанию отключена -->
+        <button
+                type="submit"
+                id="registerBtn"
+                disabled
+                class="mt-4 w-full bg-gray-300 text-white px-4 py-2 rounded-md transition duration-300
+             hover:bg-gray-300 cursor-not-allowed"
+        >
             Зарегистрироваться
         </button>
+
+        <!-- Ссылка на вход -->
+        <div class="text-center mt-4">
+            <a href="login.html" class="text-blue-500 hover:text-blue-700 hover:underline">
+                Уже зарегистрированы? Войти.
+            </a>
+        </div>
     </form>
 </div>
+
+<script>
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const registerBtn = document.getElementById("registerBtn");
+
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function checkInputs() {
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (name && email && password && validateEmail(email)) {
+            registerBtn.disabled = false;
+            registerBtn.classList.remove("cursor-not-allowed", "opacity-50");
+            registerBtn.classList.add("hover:bg-blue-600", "bg-blue-500", "cursor-pointer");
+        } else {
+            registerBtn.disabled = true;
+            registerBtn.classList.remove("hover:bg-blue-600", "bg-blue-500", "cursor-pointer");
+            registerBtn.classList.add("cursor-not-allowed", "opacity-50");
+        }
+    }
+
+    // Обработка отправки формы
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!validateEmail(email)) {
+            alert("Пожалуйста, введите корректный email с символом '@'");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Пароль должен содержать минимум 6 символов");
+            return;
+        }
+
+        // Сохраняем данные пользователя
+        const userData = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+        localStorage.setItem("userData", JSON.stringify(userData));
+        alert("Регистрация прошла успешно!");
+
+        // Переход на страницу входа
+        window.location.href = "login.html";
+    });
+
+    // Слушаем изменения полей
+    nameInput.addEventListener("input", checkInputs);
+    emailInput.addEventListener("input", checkInputs);
+    passwordInput.addEventListener("input", checkInputs);
+</script>
+
 </body>
 </html>
