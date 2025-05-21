@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Оплата заказа</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+  <!-- Дополнительные стили -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- Шапка сайта -->
+<header class="bg-yellow-500 text-white p-4 flex justify-between items-center">
+  <a href="index.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
+  <div>
+    <a href="login.html" class="hover:text-yellow-300 mr-4">Войти</a>
+    <a href="register.html" class="hover:text-yellow-300">Зарегистрироваться</a>
+  </div>
+</header>
+
+<!-- Основное содержимое: форма оплаты по центру -->
+<main class="flex-grow container mx-auto flex items-center justify-center py-10">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Оплата заказа</h2>
+    <form>
+      <label class="block mb-4">
+        <span class="block mb-2 font-medium">Сумма к оплате:</span>
+        <input
+                type="number"
+                value="500"
+                disabled
+                class="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </label>
+
+      <button
+              type="submit"
+              class="mt-4 w-full bg-blue-500 text-white px-4 py-3 rounded-md hover:bg-blue-600 transition duration-300">
+        Оплатить
+      </button>
+
+      <button
+              type="button"
+              onclick="window.location.href='personal-account.html'"
+              class="mt-3 w-full bg-green-500 text-white px-4 py-3 rounded-md hover:bg-green-600 transition duration-300">
+        Пополнить счёт
+      </button>
+    </form>
+  </div>
+</main>
+
+
+<footer class="bg-gray-800 text-white text-center py-4 mt-auto">
+  <p>
+    <a href="privacy.html" class="hover:text-gray-400">Политика конфиденциальности</a>
+    |
+    <a href="adminChat.html" class="hover:text-gray-400">Связь с администратором</a>
+  </p>
+</footer>
+
+</body>
+</html>

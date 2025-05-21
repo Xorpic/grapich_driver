@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Список заказов</title>
+    <script src="https://cdn.tailwindcss.com "></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- Шапка -->
+<header class="bg-yellow-500 text-white p-4 flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
+</header>
+
+<!-- Поисковая строка -->
+<div class="container mx-auto p-8">
+    <input type="text" placeholder="Поиск по городам..." class="border border-gray-300 p-2 w-full mb-4 rounded-md">
+</div>
+
+<!-- Список заказов -->
+<div class="container mx-auto p-8">
+    <table class="w-full table-auto">
+        <thead>
+        <tr>
+            <th class="px-4 py-2">Отправление</th>
+            <th class="px-4 py-2">Получение</th>
+            <th class="px-4 py-2">Вес</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="border px-4 py-2">Красноярск</td>
+            <td class="border px-4 py-2">Екатеринбург</td>
+            <td class="border px-4 py-2">100 кг</td>
+        </tr>
+        <tr>
+            <td class="border px-4 py-2">Москва</td>
+            <td class="border px-4 py-2">Новосибирск</td>
+            <td class="border px-4 py-2">200 кг</td>
+        </tr>
+        <tr>
+            <td class="border px-4 py-2">Санкт-Петербург</td>
+            <td class="border px-4 py-2">Казань</td>
+            <td class="border px-4 py-2">150 кг</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Футер -->
+<footer class="bg-gray-800 text-white text-center py-2 mt-auto">
+    <p>
+        <a href="privacy.html" class="hover:text-gray-400">Политика конфиденциальности</a>
+        |
+        <a href="adminChat.html" class="hover:text-gray-400">Связь с администратором</a>
+    </p>
+</footer>
+
+</body>
+</html>

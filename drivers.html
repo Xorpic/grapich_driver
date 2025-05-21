@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Информация о водителе</title>
+    <script src="https://cdn.tailwindcss.com "></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- Шапка -->
+<header class="bg-yellow-500 text-white p-4 flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
+</header>
+
+<!-- Поисковая строка -->
+<div class="container mx-auto p-8">
+    <input type="text" placeholder="Поиск по ФИО..." class="border border-gray-300 p-2 w-full mb-4 rounded-md">
+</div>
+
+
+<!-- Список водителей -->
+<div class="container mx-auto p-8">
+    <table class="w-full table-auto">
+        <thead>
+        <tr>
+            <th class="px-4 py-2">ФИО</th>
+            <th class="px-4 py-2">Стаж</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="border px-4 py-2">Иванов Иван Иванович</td>
+            <td class="border px-4 py-2">5 лет</td>
+        </tr>
+        <tr>
+            <td class="border px-4 py-2">Петров Петр Петрович</td>
+            <td class="border px-4 py-2">3 года</td>
+        </tr>
+        <tr>
+            <td class="border px-4 py-2">Сидоров Сидор Сидорович</td>
+            <td class="border px-4 py-2">7 лет</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="bg-gray-800 text-white text-center py-4 mt-auto">
+    <p>
+        <a href="privacy.html" class="hover:text-gray-400">Политика конфиденциальности</a>
+        |
+        <a href="adminChat.html" class="hover:text-gray-400">Связь с администратором</a>
+    </p>
+</footer>
+
+</body>
+</html>
