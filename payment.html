@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Оплата заказа</title>
-  <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Дополнительные стили -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
-<!-- Шапка сайта -->
 <header class="bg-yellow-500 text-white py-6 px-4 flex justify-between items-center rounded-b-lg shadow-md">
   <a href="index2.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
   <div>
@@ -18,7 +15,6 @@
   </div>
 </header>
 
-<!-- Основное содержимое: форма оплаты по центру -->
 <main class="flex-grow container mx-auto flex items-center justify-center py-10">
   <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-6 text-center">Оплата заказа</h2>
@@ -37,7 +33,6 @@
         />
       </label>
 
-      <!-- Уведомление об успешной оплате (изначально скрыто) -->
       <div id="successMessage" class="hidden mb-4 p-3 bg-green-100 text-green-700 rounded-md text-center">
         Успешно оплачено!
       </div>
@@ -71,22 +66,15 @@
   document.getElementById('paymentForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Получаем сумму
     const amount = document.getElementById('amountInput').value;
 
-    // Здесь можно добавить логику реальной оплаты
-    // Пока просто имитируем успешную оплату
-
-    // Показываем сообщение об успехе
     document.getElementById('successMessage').classList.remove('hidden');
 
-    // Делаем кнопку оплаты неактивной на 3 секунды
     const payButton = document.getElementById('payButton');
     payButton.disabled = true;
     payButton.classList.add('bg-gray-400', 'cursor-not-allowed');
     payButton.classList.remove('bg-blue-500', 'hover:bg-blue-600');
 
-    // Через 3 секунды возвращаем кнопку в исходное состояние
     setTimeout(() => {
       document.getElementById('successMessage').classList.add('hidden');
       payButton.disabled = false;

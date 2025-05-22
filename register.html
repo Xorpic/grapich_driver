@@ -40,7 +40,6 @@
             />
         </label>
 
-        <!-- Кнопка по умолчанию отключена -->
         <button
                 type="submit"
                 id="registerBtn"
@@ -51,7 +50,6 @@
             Зарегистрироваться
         </button>
 
-        <!-- Ссылка на вход -->
         <div class="text-center mt-4">
             <a href="login.html" class="text-blue-500 hover:text-blue-700 hover:underline">
                 Уже зарегистрированы? Войти.
@@ -86,7 +84,6 @@
         }
     }
 
-    // Обработка отправки формы
     document.getElementById("registerForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -104,7 +101,6 @@
             return;
         }
 
-        // Сохраняем данные пользователя
         const userData = {
             name: name,
             email: email,
@@ -114,11 +110,9 @@
         localStorage.setItem("userData", JSON.stringify(userData));
         alert("Регистрация прошла успешно!");
 
-        // Переход на страницу входа
         window.location.href = "login.html";
     });
 
-    // Слушаем изменения полей
     nameInput.addEventListener("input", checkInputs);
     emailInput.addEventListener("input", checkInputs);
     passwordInput.addEventListener("input", checkInputs);

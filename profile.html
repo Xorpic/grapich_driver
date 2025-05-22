@@ -7,18 +7,15 @@
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
-<!-- Шапка -->
 <header class="bg-yellow-500 text-white py-6 px-4 flex justify-between items-center rounded-b-lg shadow-md">
     <a href="index2.html" class="text-2xl font-bold hover:text-yellow-300 transition">МаршрутOne</a>
 
 </header>
 
-<!-- Контент -->
 <main class="flex-grow container mx-auto p-8">
     <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
         <h2 class="text-2xl font-bold mb-4 text-center">Профиль пользователя</h2>
 
-        <!-- ФИО -->
         <label class="block mb-4">
             <span class="block mb-2 font-medium">ФИО:</span>
             <input
@@ -29,7 +26,6 @@
             />
         </label>
 
-        <!-- Телефон -->
         <label class="block mb-4">
             <span class="block mb-2 font-medium">Номер телефона:</span>
             <input
@@ -41,7 +37,6 @@
             <small class="text-gray-500 mt-1 block">После +7 должно быть ровно 10 цифр</small>
         </label>
 
-        <!-- Email (только для чтения) -->
         <label class="block mb-4">
             <span class="block mb-2 font-medium">Email:</span>
             <input
@@ -52,7 +47,6 @@
             />
         </label>
 
-        <!-- Кнопка сохранения -->
         <button
                 id="saveBtn"
                 class="mt-4 w-full bg-gray-300 text-white px-4 py-2 rounded-md transition duration-300"
@@ -63,7 +57,6 @@
     </div>
 </main>
 
-<!-- Футер -->
 <footer class="bg-gray-800 text-white text-center py-2 mt-auto">
     <p>
         <a href="privacy.html" class="hover:text-gray-400">Политика конфиденциальности</a>
@@ -78,13 +71,11 @@
     const emailInput = document.getElementById("email");
     const saveBtn = document.getElementById("saveBtn");
 
-    // Сохраняем исходные значения для сравнения
     let originalValues = {
         fullName: "",
         phone: ""
     };
 
-    // Загружаем данные из localStorage
     const savedData = JSON.parse(localStorage.getItem("userData")) || {};
 
     if (savedData.email) {
@@ -105,7 +96,6 @@
         const fullName = fullNameInput.value.trim();
         const phone = phoneInput.value.replace(/\D/g, ""); // Только цифры
 
-        // Проверяем что поля заполнены И значения изменились
         const hasChanges = fullName !== originalValues.fullName ||
             phone !== originalValues.phone.replace(/\D/g, "");
 
@@ -128,7 +118,6 @@
         saveBtn.classList.add("bg-gray-300");
     }
 
-    // Маска для телефона
     phoneInput.addEventListener("input", function(e) {
         let x = this.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
 
@@ -142,11 +131,9 @@
         validateInputs();
     });
 
-    // Валидация при изменении полей
     fullNameInput.addEventListener("input", validateInputs);
     phoneInput.addEventListener("input", validateInputs);
 
-    // Сохранение данных
     saveBtn.addEventListener("click", function(e) {
         e.preventDefault();
 
@@ -164,7 +151,6 @@
             return;
         }
 
-        // Обновляем оригинальные значения
         originalValues = {
             fullName: fullName,
             phone: phone
@@ -177,10 +163,9 @@
         }));
 
         alert("Данные успешно сохранены!");
-        disableSaveButton(); // Делаем кнопку неактивной после сохранения
+        disableSaveButton();
     });
 
-    // Проверка при загрузке
     validateInputs();
 </script>
 

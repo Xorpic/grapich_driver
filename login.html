@@ -10,7 +10,7 @@
 <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
   <h2 class="text-2xl font-bold mb-4 text-center">Вход</h2>
 
-  <!-- Форма -->
+
   <form id="loginForm" class="space-y-4">
     <label class="block">
       Email:
@@ -31,7 +31,7 @@
       />
     </label>
 
-    <!-- Кнопка по умолчанию отключена -->
+
     <button
             type="submit"
             id="loginBtn"
@@ -68,7 +68,7 @@
     }
   }
 
-  // Обработка отправки формы
+
   document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -82,11 +82,9 @@
 
     localStorage.setItem("userData", JSON.stringify({ email }));
 
-    // Переход на главную
     window.location.href = "index2.html";
   });
 
-  // Слушаем изменения полей
   emailInput.addEventListener("input", checkInputs);
   passwordInput.addEventListener("input", checkInputs);
 </script>
